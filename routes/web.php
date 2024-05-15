@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Alazzidev\LaraodooXmlrpc\Facades\Odoo;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    $searchResult = Odoo::search('res.partner', []);
+    $records = Odoo::read('res.partner', $searchResult, ['name', 'id']);
+    dd($records);
     return view('welcome');
 });
